@@ -1,0 +1,49 @@
+<h3>Welcome {{ user.username }}</h3>
+<a href="{% url 'sademolaadedejiscrumy:add_goal' %}">Add new goal</a>
+<table>
+    <tr>
+        <th>User</th>
+        <th>Weekly Goals</th>
+        <th>Daily Goals</th>
+        <th>Verify Goals</th>
+        <th>Done Goals</th>
+    </tr>
+
+    {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+
+            <td>
+            {% for goal in weekly_goals %}
+                {% if goal.user == user %}
+                    <a href="{% url 'sademolaadedejiscrumy:move_goal' goal.goal_id %}">{{ goal.goal_id }},{{ goal.goal_name }}</a>
+                {% endif %}
+            {% endfor %}
+            </td>
+
+            <td>
+            {% for goal in daily_goals %}
+                {% if goal.user == user %}
+                    <a href="{% url 'sademolaadedejiscrumy:move_goal' goal.goal_id %}">{{ goal.goal_id }},{{ goal.goal_name }}</a>
+                {% endif %}
+            {% endfor %}
+            </td>
+
+            <td>
+            {% for goal in verify_goals %}
+                {% if goal.user == user %}
+                    <a href="{% url 'sademolaadedejiscrumy:move_goal' goal.goal_id %}">{{ goal.goal_id }},{{ goal.goal_name }}</a>
+                {% endif %}
+            {% endfor %}
+            </td>
+
+            <td>
+            {% for goal in done_goals %}
+                {% if goal.user == user %}
+                    <a href="{% url 'sademolaadedejiscrumy:move_goal' goal.goal_id %}">{{ goal.goal_id }},{{ goal.goal_name }}</a>
+                {% endif %}
+            {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
